@@ -98,7 +98,7 @@ public class ObservationResourceProvider extends BaseResourceProvider {
 			retVal.setCreated(false);
 			e.printStackTrace();
 		}
-		
+		//TODO: setup an anlysis object
 		return retVal;
 	}
 
