@@ -46,7 +46,7 @@ public class O2HRAnalysis {
                 coding.getCode().equalsIgnoreCase(O2Coding.getCode())) {
 			O2count += 1;
 
-            String value = obs.getValueQuantity().toString();
+            String value = obs.getValueQuantity().getValue().toString();
             Float percentage = Float.parseFloat(value) / 100;
             //TODO: update the most recent datetime if out of range
             if (percentage < .92) {
@@ -64,7 +64,7 @@ public class O2HRAnalysis {
                 coding.getCode().equalsIgnoreCase(HRCoding.getCode())) {
             HRcount += 1;
 
-            String value = obs.getValueQuantity().toString();
+            String value = obs.getValueQuantity().getValue().toString();
             Float percentage = Float.parseFloat(value) / 100;
             //TODO: update the most recent datetime if out of range
             if (percentage < .92) {
