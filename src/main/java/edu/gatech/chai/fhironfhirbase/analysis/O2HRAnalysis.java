@@ -67,7 +67,7 @@ public class O2HRAnalysis {
             String value = obs.getValueQuantity().getValue().toString();
             Float percentage = Float.parseFloat(value) / 100;
             //TODO: update the most recent datetime if out of range
-            if (percentage < .92) {
+            if (Integer.parseInt(value) < 84) {
                 HRmostRecentOutOfRange = new Date();
                 EmailSender javaEmail = new EmailSender();
                 javaEmail.setMailServerProperties();

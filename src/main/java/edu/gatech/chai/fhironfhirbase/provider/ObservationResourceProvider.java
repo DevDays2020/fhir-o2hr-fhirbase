@@ -61,8 +61,12 @@ public class ObservationResourceProvider extends BaseResourceProvider {
 
 	private int preferredPageSize = 30;
 
+	private O2HRAnalysis o2HRAnalysis;
+
 	public ObservationResourceProvider() {
 		super();
+
+		o2HRAnalysis = new O2HRAnalysis();
 	}
 
 	@PostConstruct
@@ -100,7 +104,6 @@ public class ObservationResourceProvider extends BaseResourceProvider {
 			e.printStackTrace();
 		}
 		//TODO: setup an anlysis object
-		O2HRAnalysis o2HRAnalysis = new O2HRAnalysis();
 		try {
 			o2HRAnalysis.addNewOccurence(theObservation);
 		} catch (Exception e) {
@@ -260,7 +263,6 @@ public class ObservationResourceProvider extends BaseResourceProvider {
 			e.printStackTrace();
 		}
 		//TODO: setup an anlysis object
-		O2HRAnalysis o2HRAnalysis = new O2HRAnalysis();
 		try {
 			o2HRAnalysis.addNewOccurence(theObservation);
 		} catch (Exception e) {
