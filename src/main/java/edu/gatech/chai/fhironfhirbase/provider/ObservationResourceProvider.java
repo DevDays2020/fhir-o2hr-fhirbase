@@ -111,7 +111,7 @@ public class ObservationResourceProvider extends BaseResourceProvider {
 		}
 	}
 
-	@Search()
+	@Search(allowUnknownParams = true)
 	public IBundleProvider findObservationsById(
 			@RequiredParam(name = Observation.SP_RES_ID) TokenOrListParam theObservationIds, @Sort SortSpec theSort,
 
@@ -141,7 +141,7 @@ public class ObservationResourceProvider extends BaseResourceProvider {
 		return myBundleProvider;
 	}
 
-	@Search()
+	@Search(allowUnknownParams = true)
 	public IBundleProvider findObservationsByParams(
 			@OptionalParam(name = Observation.SP_CODE) TokenOrListParam theOrCodes,
 			@OptionalParam(name = Observation.SP_DATE) DateParam theDate,

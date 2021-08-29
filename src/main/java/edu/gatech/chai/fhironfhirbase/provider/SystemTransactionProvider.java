@@ -525,6 +525,20 @@ public class SystemTransactionProvider {
 			theBundle.setType(BundleType.BATCHRESPONSE);
 
 			break;
+		case SEARCHSET:
+			// This is search set via transaction. Subscription is a usecase here.
+			// This is bundle response of search (e.x. subscription by search.
+			for (BundleEntryComponent entry : entries) {
+				Resource resource = entry.getResource();
+				if (resource instanceof Observation) {
+					MethodOutcome mo = client.create().resource((Observation)resource).encodedJson().prettyPrint().execute();
+					if (mo.getCreated() != null && mo.getCreated() == true) {
+						
+					}
+				} else {
+					// We only do the Observation.
+				}
+			}
 		default:
 
 		}
