@@ -22,6 +22,7 @@ import java.util.Set;
 
 import javax.annotation.PostConstruct;
 
+import edu.gatech.chai.fhironfhirbase.analysis.O2HRAnalysis;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.IdType;
@@ -88,7 +89,7 @@ public class ObservationResourceProvider extends BaseResourceProvider {
 	public MethodOutcome createObservation(@ResourceParam Observation theObservation) {
 		validateResource(theObservation);
 		MethodOutcome retVal = new MethodOutcome();
-		
+
 		try {
 			IBaseResource createdObservation = getFhirbaseMapping().create(theObservation, getResourceType());
 			retVal.setId(createdObservation.getIdElement());
@@ -99,6 +100,13 @@ public class ObservationResourceProvider extends BaseResourceProvider {
 			e.printStackTrace();
 		}
 		//TODO: setup an anlysis object
+		O2HRAnalysis o2HRAnalysis = new O2HRAnalysis();
+		try {
+			o2HRAnalysis.addNewOccurence(theObservation);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return retVal;
 	}
 
@@ -241,15 +249,24 @@ public class ObservationResourceProvider extends BaseResourceProvider {
 	public MethodOutcome updateObservation(@IdParam IdType theId, @ResourceParam Observation theObservation) {
 		validateResource(theObservation);
 		MethodOutcome retVal = new MethodOutcome();
-		
+
 		try {
-			IBaseResource updatedObservation = getFhirbaseMapping().update(theObservation, getResourceType());
-			retVal.setId(updatedObservation.getIdElement());
-			retVal.setResource(updatedObservation);
+			IBaseResource createdObservation = getFhirbaseMapping().create(theObservation, getResourceType());
+			retVal.setId(createdObservation.getIdElement());
+			retVal.setResource(createdObservation);
+			retVal.setCreated(true);
 		} catch (SQLException e) {
+			retVal.setCreated(false);
 			e.printStackTrace();
 		}
-		
+		//TODO: setup an anlysis object
+		O2HRAnalysis o2HRAnalysis = new O2HRAnalysis();
+		try {
+			o2HRAnalysis.addNewOccurence(theObservation);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return retVal;
 	}
 
